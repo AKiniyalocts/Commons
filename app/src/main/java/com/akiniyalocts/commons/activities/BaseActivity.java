@@ -14,6 +14,7 @@ public class BaseActivity extends AppCompatActivity {
      *
      * @param context parent context
      * @param clazz activity to start
+     * @param finishCurrent clears your current activity stack. Useful for authentication UI's
      */
     public static void start(Context context, Class clazz, boolean finishCurrent){
         Intent start  = new Intent(context, clazz);
