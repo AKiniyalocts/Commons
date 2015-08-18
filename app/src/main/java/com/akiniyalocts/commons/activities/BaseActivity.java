@@ -3,6 +3,7 @@ package com.akiniyalocts.commons.activities;
 import android.content.Context;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.Toolbar;
 
 /**
  * Created by anthony on 7/18/15.
@@ -26,5 +27,13 @@ public class BaseActivity extends AppCompatActivity {
 
 
         context.startActivity(start);
+    }
+
+    public void setToolbarAsActionbar(Toolbar toolbar){
+        setSupportActionBar(toolbar);
+    }
+
+    public void initToolbarAsActionBar(){
+
     }
 }

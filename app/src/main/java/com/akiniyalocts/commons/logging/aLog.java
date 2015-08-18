@@ -1,5 +1,6 @@
 package com.akiniyalocts.commons.logging;
 
+import android.support.annotation.NonNull;
 import android.util.Log;
 
 /**
@@ -9,8 +10,8 @@ public class aLog {
 
   private static boolean isLogging = false;
 
-  public static void w(String TAG, String msg){
-    if(TAG != null && msg != null && isLogging){
+  public static void w(@NonNull String TAG, @NonNull String msg){
+    if(isLogging){
       Log.w(TAG, msg);
     }
   }
