@@ -11,5 +11,5 @@ Classes I always end up creating and including in my Android projects
 	}`
 	
 	dependencies {
-	        compile 'com.github.AKiniyalocts:Commons:v1.05'
+	        compile 'com.github.AKiniyalocts:Commons:v1.06'
 	}
