@@ -1,4 +1,4 @@
-package com.akiniyalocts.commons.activities;
+package com.akiniyalocts.commons.activities.drawer;
 
 import android.content.res.Configuration;
 import android.os.Bundle;
@@ -8,6 +8,7 @@ import android.view.Gravity;
 import android.view.MenuItem;
 
 import com.akiniyalocts.commons.R;
+import com.akiniyalocts.commons.activities.ToolbarActivity;
 
 /**
  * Created by anthony on 9/15/15.
