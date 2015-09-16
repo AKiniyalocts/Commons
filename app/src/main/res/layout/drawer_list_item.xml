@@ -3,7 +3,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:clickable="true"
-    android:padding="13dp"
+    android:padding="@dimen/drawer_item_left_padding"
     android:background="?attr/selectableItemBackground"
     android:id="@+id/drawer_item_parent">
 
@@ -19,9 +19,9 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textColor="@color/primary_material_dark"
-        android:paddingLeft="25dp"
+        android:paddingLeft="@dimen/drawer_item_text_left_padding"
         android:layout_centerVertical="true"
-        android:textSize="14sp"
+        android:textSize="@dimen/drawer_item_text_size"
         android:layout_centerInParent="true"
         android:layout_toRightOf="@+id/drawer_item_icon"
         android:id="@+id/drawer_item_title"/>

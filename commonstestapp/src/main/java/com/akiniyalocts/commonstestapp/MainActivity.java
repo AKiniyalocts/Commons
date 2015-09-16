@@ -70,13 +70,13 @@ public class MainActivity extends DrawerActivity implements DrawerAdapter.Drawer
         mDrawerAdapter.addItem(
                 new DrawerItemBuilder("Test")
                         .setIsHeader(true)
-                        .setHeaderImageDrawable("http://knokfirst.com/thumb/colorgasm1.png")
+                        .setHeaderImageDrawable("http://knokfirst.com/thumb/photo29.jpg")
                         .setHeaderTitle("Awesome Title")
                         .createDrawerItem()
         );
 
         mDrawerAdapter.addItem(
-                new DrawerItemBuilder("Timeline")
+                new DrawerItemBuilder("Home")
                         .setUnicode("\uF262")
                         .createDrawerItem()
         );
@@ -86,26 +86,27 @@ public class MainActivity extends DrawerActivity implements DrawerAdapter.Drawer
                         .createDrawerItem()
         );
         mDrawerAdapter.addItem(
-                new DrawerItemBuilder("Timeline")
+                new DrawerItemBuilder("Mentions")
                         .setUnicode("\uF214")
                         .createDrawerItem()
         );
         mDrawerAdapter.addItem(
-                new DrawerItemBuilder("Timeline")
+                new DrawerItemBuilder("Favorites")
                         .setUnicode("\uF262")
                         .createDrawerItem()
         );
         mDrawerAdapter.addItem(
                 new DrawerItemBuilder("")
                         .setIsSeparator(true)
+                        .setSeparatorTitle("About")
                         .createDrawerItem()
         );
         mDrawerAdapter.addItem(
-                new DrawerItemBuilder("About")
+                new DrawerItemBuilder("Website")
                         .createDrawerItem()
         );
         mDrawerAdapter.addItem(
-                new DrawerItemBuilder("Settings")
+                new DrawerItemBuilder("Github")
                         .createDrawerItem()
         );
 

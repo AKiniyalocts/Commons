@@ -8,6 +8,7 @@ public class DrawerItemBuilder {
     private String unicode = null;
     private boolean isHeader = false;
     private boolean isSeparator = false;
+    private String separatorTitle = null;
 
     public DrawerItemBuilder(String title){
         this.title = title;
@@ -53,7 +54,12 @@ public class DrawerItemBuilder {
         return this;
     }
 
+    public DrawerItemBuilder setSeparatorTitle(String separatorTitle){
+        this.separatorTitle = separatorTitle;
+        return this;
+    }
+
     public DrawerItem createDrawerItem() {
-        return new DrawerItem(title, headerDrawable, headerImageUrl, headerTitle, unicode, isHeader, isSeparator);
+        return new DrawerItem(title, headerDrawable, headerImageUrl, headerTitle, unicode, isHeader, isSeparator, separatorTitle);
     }
 }

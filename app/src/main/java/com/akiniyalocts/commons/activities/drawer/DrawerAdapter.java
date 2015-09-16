@@ -141,9 +141,13 @@ public class DrawerAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>
 
                 drawerItemViewHolder.mTitle.setText(item.getTitle());
 
-                if (item.getUnicode() != null)
+                if (item.getUnicode() != null) {
                     drawerItemViewHolder.mIcon.setText(item.getUnicode());
+                }
 
+                else{
+                    drawerItemViewHolder.mTitle.setPadding(0, 0, 0, 0);
+                }
                 break;
 
 
@@ -173,6 +177,13 @@ public class DrawerAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>
 
                 break;
 
+
+            case VIEW_TYPE_SEPARATOR:
+                DrawerSeperatorViewHolder drawerSeperatorViewHolder = ((DrawerSeperatorViewHolder) holder);
+
+                if(item.getSeparatorTitle() != null){
+                    drawerSeperatorViewHolder.mTitle.setText(item.getSeparatorTitle());
+                }
 
 
 
@@ -232,8 +243,12 @@ public class DrawerAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>
     }
 
     class DrawerSeperatorViewHolder extends RecyclerView.ViewHolder{
+
+        TextView mTitle;
+
         public DrawerSeperatorViewHolder(View itemView) {
             super(itemView);
+            mTitle = (TextView)itemView.findViewById(R.id.drawer_separator_title);
         }
     }
 }

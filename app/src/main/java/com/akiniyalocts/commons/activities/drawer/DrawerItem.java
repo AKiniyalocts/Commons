@@ -19,7 +19,9 @@ public class DrawerItem {
 
     private boolean isSeparator;
 
-    public DrawerItem(String title, int headerDrawable, String headerImageUrl, String headerTitle, String unicode, boolean isHeader, boolean isSeparator) {
+    private String separatorTitle;
+
+    public DrawerItem(String title, int headerDrawable, String headerImageUrl, String headerTitle, String unicode, boolean isHeader, boolean isSeparator, String separatorTitle) {
         this.title = title;
         this.headerDrawable = headerDrawable;
         this.headerImageUrl = headerImageUrl;
@@ -27,6 +29,7 @@ public class DrawerItem {
         this.unicode = unicode;
         this.isHeader = isHeader;
         this.isSeparator = isSeparator;
+        this.separatorTitle = separatorTitle;
     }
 
     public String getTitle() {
@@ -87,5 +90,13 @@ public class DrawerItem {
 
     public void setHeaderTitle(String headerTitle) {
         this.headerTitle = headerTitle;
+    }
+
+    public String getSeparatorTitle() {
+        return separatorTitle;
+    }
+
+    public void setSeparatorTitle(String separatorTitle) {
+        this.separatorTitle = separatorTitle;
     }
 }
