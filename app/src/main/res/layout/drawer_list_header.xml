@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:clickable="true"
+    android:background="?attr/selectableItemBackground"
+    android:layout_height="140dp"
+    android:id="@+id/drawer_header_parent">
+
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:adjustViewBounds="true"
+        android:id="@+id/drawer_header_image"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/drawer_header_title"
+        android:textSize="20sp"
+        android:textColor="@android:color/white"
+        android:padding="10dp"
+        android:layout_gravity="bottom|left"
+        />
+
+</FrameLayout>

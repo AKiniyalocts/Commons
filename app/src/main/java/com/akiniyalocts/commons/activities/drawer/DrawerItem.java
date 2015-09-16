@@ -7,17 +7,26 @@ public class DrawerItem {
 
     private String title;
 
-    private int icon;
+    private int headerDrawable;
+
+    private String headerImageUrl;
+
+    private String headerTitle;
 
     private String unicode;
 
     private boolean isHeader;
 
-    public DrawerItem(String title, int icon, String unicode, boolean isHeader) {
+    private boolean isSeparator;
+
+    public DrawerItem(String title, int headerDrawable, String headerImageUrl, String headerTitle, String unicode, boolean isHeader, boolean isSeparator) {
         this.title = title;
-        this.icon = icon;
+        this.headerDrawable = headerDrawable;
+        this.headerImageUrl = headerImageUrl;
+        this.headerTitle = headerTitle;
         this.unicode = unicode;
         this.isHeader = isHeader;
+        this.isSeparator = isSeparator;
     }
 
     public String getTitle() {
@@ -28,12 +37,12 @@ public class DrawerItem {
         this.title = title;
     }
 
-    public int getIcon() {
-        return icon;
+    public int getHeaderDrawable() {
+        return headerDrawable;
     }
 
-    public void setIcon(int icon) {
-        this.icon = icon;
+    public void setHeaderDrawable(int headerDrawable) {
+        this.headerDrawable = headerDrawable;
     }
 
     public String getUnicode() {
@@ -50,5 +59,33 @@ public class DrawerItem {
 
     public void setIsHeader(boolean isHeader) {
         this.isHeader = isHeader;
+    }
+
+    public boolean isSeparator() {
+        return isSeparator;
+    }
+
+    public void setIsSeparator(boolean isSeparator) {
+        this.isSeparator = isSeparator;
+    }
+
+    public String getHeaderImageUrl() {
+        return headerImageUrl;
+    }
+
+    public void setHeaderImageUrl(String headerImageUrl) {
+        this.headerImageUrl = headerImageUrl;
+    }
+
+    public boolean hasUrlForHeader(){
+        return this.headerImageUrl != null;
+    }
+
+    public String getHeaderTitle() {
+        return headerTitle;
+    }
+
+    public void setHeaderTitle(String headerTitle) {
+        this.headerTitle = headerTitle;
     }
 }
