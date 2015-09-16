@@ -32,7 +32,12 @@ public class MainActivity extends DrawerActivity implements DrawerAdapter.Drawer
         return mDrawerLayout;
     }
 
-    @Override
+    @Override public DrawerAdapter getDrawerAdapter() {
+        mDrawerAdapter = new DrawerAdapter(this);
+        return mDrawerAdapter;
+    }
+
+  @Override
     public Toolbar getToolBar() {
         return mToolbar;
     }
@@ -61,57 +66,56 @@ public class MainActivity extends DrawerActivity implements DrawerAdapter.Drawer
     }
 
     private void initDrawer(){
-        mDrawerAdapter = new DrawerAdapter(this);
         mDrawerAdapter.setDrawerItemListener(this);
         mDrawerAdapter.setDrawerHeaderListener(this);
 
         mRecycler.setLayoutManager(new LinearLayoutManager(this));
 
         mDrawerAdapter.addItem(
-                new DrawerItemBuilder("Test")
-                        .setIsHeader(true)
-                        .setHeaderImageDrawable("http://knokfirst.com/thumb/photo29.jpg")
-                        .setHeaderTitle("Awesome Title")
-                        .createDrawerItem()
+            new DrawerItemBuilder("Test")
+                .setIsHeader(true)
+                .setHeaderImageDrawable("http://knokfirst.com/thumb/photo29.jpg")
+                .setHeaderTitle("Awesome Title")
+                .build()
         );
 
         mDrawerAdapter.addItem(
-                new DrawerItemBuilder("Home")
-                        .setUnicode("\uF262")
-                        .createDrawerItem()
+            new DrawerItemBuilder("Home")
+                .setUnicode("\uF262")
+                .build()
+        );
+
+        mDrawerAdapter.addItem(
+            new DrawerItemBuilder("Timeline")
+                .setUnicode("\uF33B")
+                .build()
+        );
+
+
+        mDrawerAdapter.addItem(
+            new DrawerItemBuilder("Mentions")
+                    .setUnicode("\uF214")
+                    .build()
         );
         mDrawerAdapter.addItem(
-                new DrawerItemBuilder("Timeline")
-                        .setUnicode("\uF33B")
-                        .createDrawerItem()
+            new DrawerItemBuilder("Favorites")
+                    .setUnicode("\uF262")
+                    .build()
         );
-        mDrawerAdapter.addItem(
-                new DrawerItemBuilder("Mentions")
-                        .setUnicode("\uF214")
-                        .createDrawerItem()
-        );
-        mDrawerAdapter.addItem(
-                new DrawerItemBuilder("Favorites")
-                        .setUnicode("\uF262")
-                        .createDrawerItem()
-        );
-        mDrawerAdapter.addItem(
-                new DrawerItemBuilder("")
-                        .setIsSeparator(true)
-                        .setSeparatorTitle("About")
-                        .createDrawerItem()
-        );
-        mDrawerAdapter.addItem(
-                new DrawerItemBuilder("Website")
-                        .createDrawerItem()
-        );
-        mDrawerAdapter.addItem(
-                new DrawerItemBuilder("Github")
-                        .createDrawerItem()
-        );
+
+        mDrawerAdapter.addSeparator("About");
+
+        mDrawerAdapter.addUnselectableItem("Website");
+
+        mDrawerAdapter.addUnselectableItem("Github");
+
+        mDrawerAdapter.addUnselectableItem("Settings");
 
 
         mRecycler.setAdapter(mDrawerAdapter);
+
+        mDrawerAdapter.setSelectedItem(drawerPosition);
+
     }
 
 

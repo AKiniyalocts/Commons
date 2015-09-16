@@ -1,7 +1,9 @@
 package com.akiniyalocts.commons.activities.drawer;
 
 import android.content.Context;
+import android.content.res.TypedArray;
 import android.support.v7.widget.RecyclerView;
+import android.util.TypedValue;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -39,6 +41,8 @@ public class DrawerAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>
     private final static int VIEW_TYPE_SEPARATOR = 003;
 
     private List<DrawerItem> mItems;
+
+    private DrawerItem selectedItem;
 
     private LayoutInflater mInflater;
 
@@ -89,10 +93,104 @@ public class DrawerAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>
 
     }
 
-    private void addHeader(DrawerItem item){
+    public void addHeader(DrawerItem item){
+        item.setIsHeader(true);
         mItems.add(0, item);
         notifyItemInserted(0);
     }
+
+    public void addSeparator(String separatorTitle){
+      mItems.add(
+          new DrawerItemBuilder("")
+            .setIsSeparator(true)
+            .setSeparatorTitle(separatorTitle)
+            .build()
+      );
+
+      notifyItemInserted(mItems.size());
+    }
+
+    public void addSeparator(){
+      mItems.add(
+          new DrawerItemBuilder("")
+            .setIsSeparator(true)
+            .build()
+      );
+
+      notifyItemInserted(mItems.size());
+    }
+
+    public void addUnselectableItem(String title){
+      mItems.add(
+          new DrawerItemBuilder(title)
+            .setIsSelectable(false)
+            .build()
+      );
+
+      notifyItemInserted(mItems.size());
+    }
+
+
+    private DrawerItem getSelectedItem(){
+
+      if(selectedItem != null){
+        return selectedItem;
+      }
+      else{
+        return mItems.get(getFirstSelectableItem());
+      }
+    }
+
+    private int getFirstSelectableItem(){
+
+      for(int i = 0; i <= mItems.size(); i++){
+        if(mItems.get(i).isSelectable())
+          return i;
+      }
+
+      return getFirstSelectableItem();
+    }
+
+    public int getSelectedItemPosition(){
+
+      if(getSelectedItem() != null)
+        return mItems.indexOf(getSelectedItem());
+
+      else
+        return getFirstSelectableItem();
+    }
+
+    private void setSelectedItem(DrawerItem item){
+      selectedItem = item;
+    }
+
+    public void setSelectedItem(int pos){
+
+      getSelectedItem().setIsSelected(false);
+      notifyItemChanged(getSelectedItemPosition());
+
+      selectedItem = mItems.get(pos);
+      selectedItem.setIsSelected(true);
+      notifyItemChanged(pos);
+    }
+
+    private int getAccentColor() {
+      TypedValue typedValue = new TypedValue();
+
+      TypedArray a = context.obtainStyledAttributes(typedValue.data, new int[] { R.attr.colorAccent });
+      int color = a.getColor(0, 0);
+
+      a.recycle();
+
+      return color;
+    }
+
+    private int getPrimaryTextColor() {
+      return context.getResources().getColor(R.color.primary_dark_material_dark);
+
+    }
+
+
 
     @Override
     public int getItemViewType(int position) {
@@ -142,12 +240,43 @@ public class DrawerAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>
                 drawerItemViewHolder.mTitle.setText(item.getTitle());
 
                 if (item.getUnicode() != null) {
+                    drawerItemViewHolder.mIcon.setVisibility(View.VISIBLE);
                     drawerItemViewHolder.mIcon.setText(item.getUnicode());
+                    drawerItemViewHolder.mTitle.setPadding(75, 0, 0, 0);
                 }
 
                 else{
                     drawerItemViewHolder.mTitle.setPadding(0, 0, 0, 0);
+                    drawerItemViewHolder.mIcon.setVisibility(View.INVISIBLE);
                 }
+
+
+                // change bg and title/icon color
+                if(item.isSelected()){
+
+                  if(item.getUnicode() != null) {
+                    drawerItemViewHolder.mIcon.setTextColor(getAccentColor());
+                  }
+
+                  drawerItemViewHolder.mTitle.setTextColor(getAccentColor());
+
+                  drawerItemViewHolder.mParent.setBackgroundColor(
+                      context.getResources().getColor(R.color.selected));
+                }
+
+                // remove bg and icon text color
+                else{
+
+                  if(item.getUnicode() != null) {
+                    drawerItemViewHolder.mIcon.setTextColor(getPrimaryTextColor());
+                  }
+                  drawerItemViewHolder.mTitle.setTextColor(getPrimaryTextColor());
+
+                  drawerItemViewHolder.mParent.setBackgroundColor(0);
+                }
+
+                drawerItemViewHolder = null;
+
                 break;
 
 
@@ -175,6 +304,8 @@ public class DrawerAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>
                     drawerHeaderViewHolder.mTitle.setText(item.getHeaderTitle());
                 }
 
+                drawerHeaderViewHolder = null;
+
                 break;
 
 
@@ -185,9 +316,11 @@ public class DrawerAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>
                     drawerSeperatorViewHolder.mTitle.setText(item.getSeparatorTitle());
                 }
 
-
+              drawerHeaderViewHolder = null;
 
         }
+
+      item = null;
     }
 
     @Override
@@ -208,14 +341,39 @@ public class DrawerAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>
             mTitle = (TextView)itemView.findViewById(R.id.drawer_item_title);
             mIcon = (MaterialIconTextView)itemView.findViewById(R.id.drawer_item_icon);
 
-            mParent.setOnClickListener(this);
+            itemView.setOnClickListener(this);
         }
 
         @Override
         public void onClick(View v) {
             if(mItemListener != null){
                 mItemListener.onDrawerItemClicked(mItems.get(getAdapterPosition()));
+
+                setItemSelected();
             }
+        }
+
+        private void setItemSelected(){
+          DrawerItem item = mItems.get(getAdapterPosition());
+
+          // check if we can select it
+          if(item.isSelectable()){
+
+            // check if its not already selected
+            if(!item.isSelected()){
+
+              item.setIsSelected(true);
+
+              notifyItemChanged(getAdapterPosition());
+
+              getSelectedItem().setIsSelected(false);
+
+              notifyItemChanged(mItems.indexOf(getSelectedItem()));
+
+              setSelectedItem(item);
+
+            }
+          }
         }
     }
 

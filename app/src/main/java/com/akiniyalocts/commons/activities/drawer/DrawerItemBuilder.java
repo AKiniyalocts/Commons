@@ -9,6 +9,9 @@ public class DrawerItemBuilder {
     private boolean isHeader = false;
     private boolean isSeparator = false;
     private String separatorTitle = null;
+    private boolean isSelected = false;
+    private boolean selectable = true;
+
 
     public DrawerItemBuilder(String title){
         this.title = title;
@@ -59,7 +62,18 @@ public class DrawerItemBuilder {
         return this;
     }
 
-    public DrawerItem createDrawerItem() {
-        return new DrawerItem(title, headerDrawable, headerImageUrl, headerTitle, unicode, isHeader, isSeparator, separatorTitle);
+    public DrawerItemBuilder setIsSelectable(boolean isSelectable){
+        this.selectable = isSelectable;
+        return this;
+    }
+
+    public DrawerItemBuilder setIsSelected(boolean isSelected){
+        this.isSelected = isSelected;
+        return this;
+    }
+
+
+    public DrawerItem build() {
+        return new DrawerItem(title, headerDrawable, headerImageUrl, headerTitle, unicode, isHeader, isSeparator, separatorTitle, isSelected, selectable);
     }
 }

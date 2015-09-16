@@ -15,20 +15,36 @@ import com.akiniyalocts.commons.activities.ToolbarActivity;
  */
 public abstract class DrawerActivity extends ToolbarActivity {
 
+    private static String ADAPTER_POSITION = "drawer::adapter::position";
+
     public abstract DrawerLayout getDrawerLayout();
+
+    public abstract DrawerAdapter getDrawerAdapter();
 
     protected ActionBarDrawerToggle mDrawerToggle;
 
     protected DrawerLayout mDrawerLayout;
 
+    protected DrawerAdapter mDrawerAdapter;
+
+    protected int drawerPosition;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
+        mDrawerAdapter = getDrawerAdapter();
         initDrawer();
+
+        if(savedInstanceState != null){
+          drawerPosition = savedInstanceState.getInt(ADAPTER_POSITION, 1);
+        }
     }
 
-    @Override
+  @Override protected void onSaveInstanceState(Bundle outState) {
+    outState.putInt(ADAPTER_POSITION, mDrawerAdapter.getSelectedItemPosition());
+  }
+
+  @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         if (mDrawerToggle.onOptionsItemSelected(item)) {
             return true;
@@ -47,6 +63,17 @@ public abstract class DrawerActivity extends ToolbarActivity {
     public void onConfigurationChanged(Configuration newConfig) {
         super.onConfigurationChanged(newConfig);
         mDrawerToggle.onConfigurationChanged(newConfig);
+    }
+
+    @Override public void onBackPressed() {
+
+        if(mDrawerLayout.isDrawerOpen(Gravity.START)){
+            closeDrawer();
+        }
+
+        else {
+            finish();
+        }
     }
 
     private void initDrawer(){
@@ -70,7 +97,7 @@ public abstract class DrawerActivity extends ToolbarActivity {
 
     protected void openDrawer(){
         if(getDrawerLayout() != null){
-            getDrawerLayout().openDrawer(Gravity.LEFT);
+            getDrawerLayout().openDrawer(Gravity.START);
         }
     }
 
