@@ -11,7 +11,7 @@ public class DrawerItemBuilder {
     private String separatorTitle = null;
     private boolean isSelected = false;
     private boolean selectable = true;
-
+    private int itemCount = -1;
 
     public DrawerItemBuilder(String title){
         this.title = title;
@@ -72,8 +72,13 @@ public class DrawerItemBuilder {
         return this;
     }
 
+    public DrawerItemBuilder setItemCount(int itemCount){
+        this.itemCount = itemCount;
+        return this;
+    }
+
 
     public DrawerItem build() {
-        return new DrawerItem(title, headerDrawable, headerImageUrl, headerTitle, unicode, isHeader, isSeparator, separatorTitle, isSelected, selectable);
+        return new DrawerItem(title, headerDrawable, headerImageUrl, headerTitle, unicode, isHeader, isSeparator, separatorTitle, isSelected, selectable, itemCount);
     }
 }

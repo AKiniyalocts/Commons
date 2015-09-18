@@ -26,9 +26,17 @@
           android:paddingLeft="@dimen/drawer_item_text_left_padding"
           android:layout_centerVertical="true"
           android:textSize="@dimen/drawer_item_text_size"
-          android:layout_centerInParent="true"
           android:layout_toRightOf="@+id/drawer_item_icon"
           android:id="@+id/drawer_item_title"/>
+
+      <TextView
+          android:layout_width="wrap_content"
+          android:layout_height="wrap_content"
+          android:layout_alignParentRight="true"
+          android:layout_centerVertical="true"
+          android:textSize="@dimen/drawer_item_text_size"
+          android:textColor="@color/primary_material_dark"
+          android:id="@+id/drawer_item_count"/>
 
   </RelativeLayout>
 

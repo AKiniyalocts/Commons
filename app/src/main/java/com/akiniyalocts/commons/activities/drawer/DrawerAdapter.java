@@ -239,6 +239,14 @@ public class DrawerAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>
 
                 drawerItemViewHolder.mTitle.setText(item.getTitle());
 
+                if(item.getItemCount() != -1){
+                    drawerItemViewHolder.mCount.setVisibility(View.VISIBLE);
+                    drawerItemViewHolder.mCount.setText("" + item.getItemCount());
+                }
+                else {
+                    drawerItemViewHolder.mCount.setVisibility(View.INVISIBLE);
+                }
+
                 if (item.getUnicode() != null) {
                     drawerItemViewHolder.mIcon.setVisibility(View.VISIBLE);
                     drawerItemViewHolder.mIcon.setText(item.getUnicode());
@@ -259,6 +267,7 @@ public class DrawerAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>
                   }
 
                   drawerItemViewHolder.mTitle.setTextColor(getAccentColor());
+                    drawerItemViewHolder.mCount.setTextColor(getAccentColor());
 
                   drawerItemViewHolder.mParent.setBackgroundColor(
                       context.getResources().getColor(R.color.selected));
@@ -271,6 +280,7 @@ public class DrawerAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>
                     drawerItemViewHolder.mIcon.setTextColor(getPrimaryTextColor());
                   }
                   drawerItemViewHolder.mTitle.setTextColor(getPrimaryTextColor());
+                    drawerItemViewHolder.mCount.setTextColor(getPrimaryTextColor());
 
                   drawerItemViewHolder.mParent.setBackgroundColor(0);
                 }
@@ -334,11 +344,13 @@ public class DrawerAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>
         RelativeLayout mParent;
         MaterialIconTextView mIcon;
         TextView mTitle;
+        TextView mCount;
 
         public DrawerItemViewHolder(View itemView) {
             super(itemView);
             mParent = (RelativeLayout)itemView.findViewById(R.id.drawer_item_parent);
             mTitle = (TextView)itemView.findViewById(R.id.drawer_item_title);
+            mCount = (TextView)itemView.findViewById(R.id.drawer_item_count);
             mIcon = (MaterialIconTextView)itemView.findViewById(R.id.drawer_item_icon);
 
             itemView.setOnClickListener(this);

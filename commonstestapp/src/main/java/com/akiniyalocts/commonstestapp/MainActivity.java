@@ -95,11 +95,13 @@ public class MainActivity extends DrawerActivity implements DrawerAdapter.Drawer
         mDrawerAdapter.addItem(
             new DrawerItemBuilder("Mentions")
                     .setUnicode("\uF214")
+                    .setItemCount(23)
                     .build()
         );
         mDrawerAdapter.addItem(
             new DrawerItemBuilder("Favorites")
                     .setUnicode("\uF262")
+                    .setItemCount(45)
                     .build()
         );
 
