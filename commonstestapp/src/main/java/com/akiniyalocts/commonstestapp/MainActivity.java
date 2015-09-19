@@ -55,7 +55,7 @@ public class MainActivity extends DrawerActivity implements DrawerAdapter.Drawer
     }
 
     @Override
-    public void onDrawerItemClicked(DrawerItem item) {
+    public void onDrawerItemClicked(DrawerItem item, int positiion) {
         Snackbar.make(mRecycler, item.getTitle(), Snackbar.LENGTH_LONG).show();
     }
 

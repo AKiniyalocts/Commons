@@ -27,7 +27,7 @@ import java.util.List;
 public class DrawerAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 
     public interface DrawerItemListener{
-        void onDrawerItemClicked(DrawerItem item);
+        void onDrawerItemClicked(DrawerItem item, int position);
     }
 
     public interface DrawerHeaderListener{
@@ -359,7 +359,7 @@ public class DrawerAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>
         @Override
         public void onClick(View v) {
             if(mItemListener != null){
-                mItemListener.onDrawerItemClicked(mItems.get(getAdapterPosition()));
+                mItemListener.onDrawerItemClicked(mItems.get(getAdapterPosition()), getAdapterPosition());
 
                 setItemSelected();
             }
