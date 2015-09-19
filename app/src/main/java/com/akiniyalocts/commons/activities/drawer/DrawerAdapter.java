@@ -131,7 +131,7 @@ public class DrawerAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>
     }
 
 
-    private DrawerItem getSelectedItem(){
+    public DrawerItem getSelectedItem(){
 
       if(selectedItem != null){
         return selectedItem;
