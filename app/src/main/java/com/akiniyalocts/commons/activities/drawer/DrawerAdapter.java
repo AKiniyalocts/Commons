@@ -31,7 +31,7 @@ public class DrawerAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>
     }
 
     public interface DrawerHeaderListener{
-        void onDrawerHeaderClicked();
+        void onDrawerHeaderClicked(View parentView);
     }
 
     private final static int VIEW_TYPE_HEADER = 001;
@@ -407,7 +407,7 @@ public class DrawerAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>
         @Override
         public void onClick(View v) {
             if(mHeaderListener != null){
-                mHeaderListener.onDrawerHeaderClicked();
+                mHeaderListener.onDrawerHeaderClicked(v);
             }
         }
     }
